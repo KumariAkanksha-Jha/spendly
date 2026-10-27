@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spendly | Student Financial & Expense Management</title>
+  <meta name="description" content="Spendly - Student Expense Tracker, Category Budgets, Daily Safe Spend, Roommate Bill Splitter, and Savings Goals.">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Desktop Sidebar -->
+    <aside class="app-sidebar" id="appSidebar">
+      <div class="sidebar-header">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+            <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+          </svg>
+        </div>
+        <div>
+          <div class="brand-title">
+            Spendly
+            <span class="brand-badge">Campus</span>
+          </div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a class="nav-link active" data-view="dashboard" id="nav-dashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7"/>
+            <rect x="14" y="3" width="7" height="7"/>
+            <rect x="14" y="14" width="7" height="7"/>
+            <rect x="3" y="14" width="7" height="7"/>
+          </svg>
+          Dashboard
+        </a>
+        <a class="nav-link" data-view="add-expense" id="nav-add-expense">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="8" x2="12" y2="16"/>
+            <line x1="8" y1="12" x2="16" y2="12"/>
+          </svg>
+          Add Expense
+        </a>
+        <a class="nav-link" data-view="history" id="nav-history">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="1 4 1 10 7 10"/>
+            <polyline points="23 20 23 14 17 14"/>
+            <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/>
+          </svg>
+          Expense History
+        </a>
+        <a class="nav-link" data-view="budget" id="nav-budget">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <line x1="6" y1="12" x2="18" y2="12"/>
+            <line x1="12" y1="6" x2="12" y2="18"/>
+          </svg>
+          Budget
+        </a>
+        <a class="nav-link" data-view="analytics" id="nav-analytics">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="20" x2="18" y2="10"/>
+            <line x1="12" y1="20" x2="12" y2="4"/>
+            <line x1="6" y1="20" x2="6" y2="14"/>
+          </svg>
+          Analytics
+        </a>
+        <a class="nav-link" data-view="savings" id="nav-savings">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 5c-1.5 0-2.8 1.4-3 2-3.5-1.5-11-.3-11 5 0 1.8 0 3 2 4.5V20h4v-2h3v2h4v-4c1-.5 1.5-1 2-2.5 1-3.5-.5-8.5-1-8.5z"/>
+            <circle cx="9" cy="11" r="1"/>
+          </svg>
+          Savings Goals
+        </a>
+        <a class="nav-link" data-view="settings" id="nav-settings">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+          Settings
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-mini-profile">
+          <div class="user-avatar" id="sidebarAvatar">AS</div>
+          <div class="user-info">
+            <span class="user-name" id="sidebarUserName">Alex Student</span>
+            <span class="user-uni" id="sidebarUniversity">State University</span>
+          </div>
+        </div>
+        <button id="themeToggleBtn" class="btn btn-icon" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Mobile Top Header -->
+    <div class="mobile-header">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <button id="mobileMenuToggle" class="btn btn-icon" aria-label="Open Navigation">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
+        <span style="font-weight: 800; font-size: 1.15rem; color: var(--text-primary);">Spendly</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 6px;">
+        <button id="btnQuickAddMobile" class="btn btn-primary" style="padding: 6px 12px; font-size: 0.82rem;">
+          + Add
+        </button>
+      </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="app-main">
+      <!-- Universal Top Bar -->
+      <div class="top-bar">
+        <div class="page-title-group">
+          <h1 id="pageTitle">Dashboard</h1>
+          <p class="page-subtitle" id="pageSubtitle">Your student finances, allowance pace & roommate expenses</p>
+        </div>
+
+        <div class="top-bar-actions">
+          <!-- Month Filter -->
+          <div class="select-wrapper">
+            <select id="monthSelect" aria-label="Billing Month">
+              <!-- Populated dynamically -->
+            </select>
+          </div>
+
+          <!-- Currency Selector -->
+          <div class="select-wrapper">
+            <select id="currencySelect" aria-label="Select Currency">
+              <option value="$">$ (USD)</option>
+              <option value="₹">₹ (INR)</option>
+              <option value="€">€ (EUR)</option>
+              <option value="£">£ (GBP)</option>
+              <option value="C$">C$ (CAD)</option>
+              <option value="A$">A$ (AUD)</option>
+              <option value="¥">¥ (JPY)</option>
+            </select>
+          </div>
+
+          <!-- Quick action -->
+          <button id="btnOpenAddModal" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="12" y1="5" x2="12" y2="19"/>
+              <line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            Add Expense
+          </button>
+        </div>
+      </div>
+
+      <!-- ============================================== -->
+      <!-- VIEW 1: DASHBOARD -->
+      <!-- ============================================== -->
+      <section class="view-container active" id="view-dashboard">
+        <!-- KPI Cards -->
+        <div class="summary-grid">
+          <!-- Card 1: Budget -->
+          <div class="summary-card">
+            <div class="card-top">
+              <span class="card-title">Monthly Budget</span>
+              <div class="card-icon primary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="4" width="20" height="16" rx="2"/>
+                  <line x1="6" y1="12" x2="18" y2="12"/>
+                  <line x1="12" y1="6" x2="12" y2="18"/>
+                </svg>
+              </div>
+            </div>
+            <div class="card-value" id="cardBudgetVal">$0.00</div>
+            <div class="card-subtext">
+              <span>Set monthly limit</span>
+              <button id="btnOpenBudgetModal" class="budget-edit-btn">Edit</button>
+            </div>
+            <div class="progress-bar-container">
+              <div class="progress-bar" id="budgetProgress" style="width: 0%;"></div>
+            </div>
+          </div>
+
+          <!-- Card 2: Spent -->
+          <div class="summary-card">
+            <div class="card-top">
+              <span class="card-title">Total Spent</span>
+              <div class="card-icon danger">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                  <polyline points="17 6 23 6 23 12"/>
+                </svg>
+              </div>
+            </div>
+            <div class="card-value" id="cardSpentVal">$0.00</div>
+            <div class="card-subtext" id="budgetPercentText">0% of budget used</div>
+          </div>
+
+          <!-- Card 3: Remaining Balance -->
+          <div class="summary-card">
+            <div class="card-top">
+              <span class="card-title">Remaining Allowance</span>
+              <div class="card-icon success">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                </svg>
+              </div>
+            </div>
+            <div class="card-value" id="cardRemainingVal">$0.00</div>
+            <div id="remainingSubtext" class="card-subtext">Calculated from budget</div>
+          </div>
+
+          <!-- Card 4: Daily Safe-to-Spend -->
+          <div class="summary-card safe-spend-card">
+            <div class="card-top">
+              <span class="card-title" style="color: var(--info);">Daily "Safe-to-Spend"</span>
+              <div class="card-icon warning">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </div>
+            </div>
+            <div class="card-value" id="cardSafeSpendVal" style="color: var(--info);">$0.00</div>
+            <div class="card-subtext" id="safeSpendSubtext">Based on days left in month</div>
+          </div>
+        </div>
+
+        <!-- Quick Tools Strip: Splitter & Quick Add -->
+        <div class="quick-tools-strip">
+          <!-- Roommate Bill Splitter -->
+          <div class="tool-card">
+            <div class="tool-header">
+              <h2><span>🤝 Roommate / Group Bill Splitter</span></h2>
+              <span style="font-size: 0.78rem; color: var(--text-muted);">Shared Expenses</span>
+            </div>
+            <div class="split-inputs">
+              <input type="number" id="splitBillInput" placeholder="Total Bill" min="0" step="0.01">
+              <input type="number" id="splitPeopleInput" placeholder="People" min="1" value="2">
+              <select id="splitTipSelect" aria-label="Tip Percentage">
+                <option value="0">0% Tip</option>
+                <option value="5">5% Tip</option>
+                <option value="10">10% Tip</option>
+                <option value="15">15% Tip</option>
+              </select>
+              <button id="btnAddSplitAsExpense" class="btn btn-secondary" disabled>
+                + Add My Share
+              </button>
+            </div>
+            <div class="split-result-box">
+              <span id="splitResultText" class="split-result-text">Enter amount to calculate each roommate's share</span>
+            </div>
+          </div>
+
+          <!-- Quick Single Item Add -->
+          <div class="tool-card">
+            <div class="tool-header">
+              <h2><span>⚡ Quick Add Item</span></h2>
+              <span style="font-size: 0.78rem; color: var(--text-muted);">Fast Log</span>
+            </div>
+            <form id="quickAddForm" class="quick-add-form">
+              <input type="text" id="quickTitleInput" placeholder="e.g. Canteen Coffee" required>
+              <input type="number" id="quickAmountInput" placeholder="Amount" step="0.01" min="0.01" required>
+              <select id="quickCategorySelect" aria-label="Quick Category">
+                <!-- Populated dynamically -->
+              </select>
+              <button type="submit" class="btn btn-primary" style="white-space: nowrap;">
+                Add
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Dashboard Charts Preview -->
+        <div class="analytics-grid">
+          <div class="chart-card">
+            <div class="chart-header">
+              <h2><span>📊 Spending by Category</span></h2>
+            </div>
+            <div id="donutChartContainer" class="chart-container"></div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-header">
+              <h2><span>📈 Last 7 Days Pace</span></h2>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">Recent Daily</span>
+            </div>
+            <div id="barChartContainer" class="chart-container"></div>
+          </div>
+        </div>
+
+        <!-- Dashboard Recent Transactions Snippet -->
+        <div class="transactions-section" style="margin-top: 24px;">
+          <div class="transactions-header">
+            <h2>
+              <span>Recent Transactions</span>
+            </h2>
+            <button class="btn btn-secondary" id="btnGoToHistory" style="font-size: 0.82rem; padding: 6px 14px;">
+              View Full History →
+            </button>
+          </div>
+          <div class="table-responsive">
+            <table class="expense-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Description</th>
+                  <th>Category</th>
+                  <th>Payment</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
+              <tbody id="dashboardRecentTableBody">
+                <!-- Populated dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================== -->
+      <!-- VIEW 2: ADD EXPENSE (Dedicated View) -->
+      <!-- ============================================== -->
+      <section class="view-container" id="view-add-expense">
+        <div class="add-expense-card">
+          <div style="margin-bottom: 24px;">
+            <h2 style="font-size: 1.35rem; font-weight: 800; margin-bottom: 4px;">Log a New Student Expense</h2>
+            <p style="font-size: 0.86rem; color: var(--text-secondary);">Keep your allowances organized and on track</p>
+          </div>
+
+          <!-- Quick Presets -->
+          <div style="margin-bottom: 8px; font-size: 0.82rem; font-weight: 600; color: var(--text-secondary);">
+            ⚡ Common Presets
+          </div>
+          <div class="preset-chips-strip">
+            <button type="button" class="preset-chip" data-title="Canteen Lunch" data-cat="food" data-amt="6.50">🍔 Canteen Lunch ($6.50)</button>
+            <button type="button" class="preset-chip" data-title="Campus Coffee / Chai" data-cat="food" data-amt="3.50">☕ Coffee ($3.50)</button>
+            <button type="button" class="preset-chip" data-title="Textbook & Printing" data-cat="books" data-amt="15.00">📚 Books ($15.00)</button>
+            <button type="button" class="preset-chip" data-title="Metro / Bus Transit" data-cat="transport" data-amt="5.00">🚌 Metro ($5.00)</button>
+            <button type="button" class="preset-chip" data-title="Hostel Laundry" data-cat="personal" data-amt="8.00">👕 Laundry ($8.00)</button>
+          </div>
+
+          <form id="dedicatedExpenseForm">
+            <!-- Hero Amount Input -->
+            <div class="form-group">
+              <label for="dedicatedAmountInput">Amount *</label>
+              <div class="amount-input-hero">
+                <span class="amount-currency-symbol" id="dedicatedCurrencySymbol">$</span>
+                <input type="number" id="dedicatedAmountInput" step="0.01" min="0.01" placeholder="0.00" required>
+              </div>
+            </div>
+
+            <!-- Description -->
+            <div class="form-group" style="margin-bottom: 18px;">
+              <label for="dedicatedTitleInput">Expense Description *</label>
+              <input type="text" id="dedicatedTitleInput" placeholder="e.g. Physics Textbook, Mess Lunch, Wifi Share" required>
+            </div>
+
+            <!-- Category Picker Cards -->
+            <div class="form-group" style="margin-bottom: 20px;">
+              <label>Select Category *</label>
+              <div class="category-picker-grid" id="categoryPickerGrid">
+                <!-- Populated dynamically -->
+              </div>
+              <input type="hidden" id="dedicatedSelectedCategory" value="food">
+            </div>
+
+            <!-- Date & Payment Method -->
+            <div class="form-row" style="margin-bottom: 18px;">
+              <div class="form-group">
+                <label for="dedicatedDateInput">Date *</label>
+                <input type="date" id="dedicatedDateInput" required>
+              </div>
+              <div class="form-group">
+                <label for="dedicatedPaymentSelect">Payment Method</label>
+                <select id="dedicatedPaymentSelect">
+                  <option value="UPI/Card">UPI / Debit Card</option>
+                  <option value="Cash">Cash</option>
+                  <option value="Online">Online / Net Banking</option>
+                  <option value="Bank Transfer">Bank Transfer</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Split Bill Toggle -->
+            <div style="background: var(--bg-card-subtle); border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 18px;">
+              <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 600; font-size: 0.9rem;">
+                <input type="checkbox" id="splitBillCheckbox" style="width: 17px; height: 17px;">
+                Split with Roommates / Friends?
+              </label>
+              <div id="splitCalculationDetails" style="display: none; margin-top: 12px;">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="dedicatedSplitPeople">Total Friends Sharing</label>
+                    <input type="number" id="dedicatedSplitPeople" value="2" min="1">
+                  </div>
+                  <div class="form-group">
+                    <label>Your Calculated Share</label>
+                    <div style="font-weight: 800; font-size: 1.25rem; color: var(--primary); padding-top: 6px;" id="dedicatedSharePreview">
+                      $0.00
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Notes -->
+            <div class="form-group" style="margin-bottom: 24px;">
+              <label for="dedicatedNotesInput">Notes / Receipt details (Optional)</label>
+              <textarea id="dedicatedNotesInput" rows="2" placeholder="e.g. Paid together for study session snacks"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 14px; font-size: 1.05rem;">
+              Save Expense
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- ============================================== -->
+      <!-- VIEW 3: EXPENSE HISTORY -->
+      <!-- ============================================== -->
+      <section class="view-container" id="view-history">
+        <div class="transactions-section">
+          <div class="transactions-header">
+            <h2>
+              <span>Expense History</span>
+              <span id="transactionCountBadge" class="brand-badge">0 items</span>
+            </h2>
+
+            <div class="table-controls">
+              <!-- Search -->
+              <div class="search-box">
+                <span class="search-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                  </svg>
+                </span>
+                <input type="text" id="searchInput" placeholder="Search description, notes...">
+              </div>
+
+              <!-- Category Filter -->
+              <select id="categoryFilterSelect" aria-label="Filter by Category">
+                <option value="all">All Categories</option>
+              </select>
+
+              <!-- Payment Method Filter -->
+              <select id="paymentFilterSelect" aria-label="Filter by Payment Method">
+                <option value="all">All Payment Methods</option>
+                <option value="UPI/Card">UPI / Card</option>
+                <option value="Cash">Cash</option>
+                <option value="Online">Online / Net Banking</option>
+                <option value="Bank Transfer">Bank Transfer</option>
+              </select>
+
+              <!-- Sort -->
+              <select id="sortSelect" aria-label="Sort Transactions">
+                <option value="date_desc">Newest First</option>
+                <option value="date_asc">Oldest First</option>
+                <option value="amount_desc">Highest Amount</option>
+                <option value="amount_asc">Lowest Amount</option>
+              </select>
+
+              <!-- Export CSV -->
+              <button id="btnExportCSV" class="btn btn-secondary" title="Export to CSV spreadsheet">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                CSV
+              </button>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="expense-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Description & Notes</th>
+                  <th>Category</th>
+                  <th>Payment</th>
+                  <th>Amount</th>
+                  <th style="width: 80px;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="expensesTableBody">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+
+          <div id="emptyStateContainer" class="empty-state" style="display: none;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M16 16s-1.5-2-4-2-4 2-4 2"/>
+              <line x1="9" y1="9" x2="9.01" y2="9"/>
+              <line x1="15" y1="9" x2="15.01" y2="9"/>
+            </svg>
+            <h3>No expenses found</h3>
+            <p>No transactions match your current search or month filter.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================== -->
+      <!-- VIEW 4: BUDGET (Overall + Category Budgets) -->
+      <!-- ============================================== -->
+      <section class="view-container" id="view-budget">
+        <!-- Overall Budget Overview Card -->
+        <div class="budget-overview-card">
+          <div>
+            <span class="card-title">Overall Monthly Budget</span>
+            <div class="card-value" id="budgetViewTotalVal">$0.00</div>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px;">
+              Total planned spending limit across all categories this month
+            </p>
+          </div>
+          <button id="btnOpenBudgetModal2" class="btn btn-primary">
+            Edit Total Budget
+          </button>
+        </div>
+
+        <!-- Category Budgets Grid -->
+        <div style="margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+          <h2 style="font-size: 1.25rem; font-weight: 800;">Category Budget Limits</h2>
+          <span style="font-size: 0.82rem; color: var(--text-muted);">Adjust individual allowances below</span>
+        </div>
+
+        <div class="category-budgets-grid" id="categoryBudgetsGrid">
+          <!-- Populated dynamically -->
+        </div>
+      </section>
+
+      <!-- ============================================== -->
+      <!-- VIEW 5: ANALYTICS -->
+      <!-- ============================================== -->
+      <section class="view-container" id="view-analytics">
+        <div class="analytics-grid">
+          <!-- Category Donut Chart -->
+          <div class="chart-card">
+            <div class="chart-header">
+              <h2><span>📊 Spending by Category</span></h2>
+            </div>
+            <div id="analyticsDonutContainer" class="chart-container"></div>
+          </div>
+
+          <!-- 7-Day Pace -->
+          <div class="chart-card">
+            <div class="chart-header">
+              <h2><span>📈 Spending Pace (Last 7 Days)</span></h2>
+            </div>
+            <div id="analyticsBarContainer" class="chart-container"></div>
+          </div>
+        </div>
+
+        <div class="quick-tools-strip" style="margin-top: 24px;">
+          <!-- Payment Methods Breakdown -->
+          <div class="tool-card">
+            <div class="tool-header">
+              <h2><span>💳 Payment Methods Used</span></h2>
+            </div>
+            <div id="analyticsPaymentContainer" style="padding: 10px 0;"></div>
+          </div>
+
+          <!-- Top Expenses Leaderboard -->
+          <div class="tool-card">
+            <div class="tool-header">
+              <h2><span>🏆 Top Expenses This Month</span></h2>
+            </div>
+            <div id="analyticsTopExpensesContainer" style="display: flex; flex-direction: column; gap: 10px;">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================== -->
+      <!-- VIEW 6: SAVINGS GOALS (New Module) -->
+      <!-- ============================================== -->
+      <section class="view-container" id="view-savings">
+        <div class="savings-header-strip">
+          <div>
+            <h2 style="font-size: 1.35rem; font-weight: 800;">Student Savings Goals</h2>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Set aside allowances for gadgets, trips, and emergency funds</p>
+          </div>
+          <button id="btnOpenAddGoalModal" class="btn btn-primary">
+            + New Savings Goal
+          </button>
+        </div>
+
+        <!-- Savings Summary Cards -->
+        <div class="summary-grid" style="margin-bottom: 24px;">
+          <div class="summary-card">
+            <div class="card-top">
+              <span class="card-title">Total Saved</span>
+              <div class="card-icon success">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                </svg>
+              </div>
+            </div>
+            <div class="card-value" id="savingsTotalSavedVal">$0.00</div>
+            <div class="card-subtext" id="savingsTotalPercentText">0% of total targets</div>
+          </div>
+
+          <div class="summary-card">
+            <div class="card-top">
+              <span class="card-title">Total Target</span>
+              <div class="card-icon purple">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <circle cx="12" cy="12" r="6"/>
+                  <circle cx="12" cy="12" r="2"/>
+                </svg>
+              </div>
+            </div>
+            <div class="card-value" id="savingsTotalTargetVal">$0.00</div>
+            <div class="card-subtext" id="savingsGoalCountText">0 active goals</div>
+          </div>
+        </div>
+
+        <!-- Goals Grid -->
+        <div class="goals-grid" id="savingsGoalsGrid">
+          <!-- Populated dynamically -->
+        </div>
+      </section>
+
+      <!-- ============================================== -->
+      <!-- VIEW 7: SETTINGS -->
+      <!-- ============================================== -->
+      <section class="view-container" id="view-settings">
+        <div class="settings-grid">
+          <!-- Student Profile -->
+          <div class="settings-card">
+            <h3>👤 Student Profile</h3>
+            <p>Personalize your Spendly campus experience</p>
+            <form id="profileForm">
+              <div class="form-group" style="margin-bottom: 14px;">
+                <label for="settingStudentName">Full Name</label>
+                <input type="text" id="settingStudentName" placeholder="Your Name">
+              </div>
+              <div class="form-group" style="margin-bottom: 14px;">
+                <label for="settingUniversity">College / University</label>
+                <input type="text" id="settingUniversity" placeholder="e.g. State University">
+              </div>
+              <div class="form-group" style="margin-bottom: 18px;">
+                <label for="settingSemester">Academic Term</label>
+                <input type="text" id="settingSemester" placeholder="e.g. Fall Semester / Year 2">
+              </div>
+              <button type="submit" class="btn btn-primary">Save Profile</button>
+            </form>
+          </div>
+
+          <!-- Currency & Preferences -->
+          <div class="settings-card">
+            <h3>🌐 Currency & Preferences</h3>
+            <p>Configure region and display currency</p>
+            <div class="form-group" style="margin-bottom: 18px;">
+              <label for="settingCurrencySelect">Preferred Currency</label>
+              <select id="settingCurrencySelect">
+                <option value="$">$ (USD)</option>
+                <option value="₹">₹ (INR)</option>
+                <option value="€">€ (EUR)</option>
+                <option value="£">£ (GBP)</option>
+                <option value="C$">C$ (CAD)</option>
+                <option value="A$">A$ (AUD)</option>
+                <option value="¥">¥ (JPY)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Appearance Theme</label>
+              <div style="display: flex; gap: 10px; margin-top: 6px;">
+                <button type="button" class="btn btn-secondary" id="btnThemeLight">☀️ Light</button>
+                <button type="button" class="btn btn-secondary" id="btnThemeDark">🌙 Dark</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Data Backup & Portability -->
+          <div class="settings-card">
+            <h3>💾 Data Backup & Portability</h3>
+            <p>Your records are stored safely in local storage</p>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              <button id="btnExportJSON" class="btn btn-secondary">
+                💾 Download Full JSON Backup
+              </button>
+              <button id="btnImportBackup" class="btn btn-secondary">
+                📂 Restore from Backup File
+              </button>
+              <input type="file" id="importFileInput" accept=".json" style="display: none;">
+              <button id="btnLoadDemo" class="btn btn-secondary">
+                💡 Load Sample Student Data
+              </button>
+              <button id="btnResetData" class="btn btn-danger" style="margin-top: 8px;">
+                🗑️ Clear All Data (Reset)
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="bottom-nav">
+      <a class="bottom-nav-item active" data-view="dashboard">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7"/>
+          <rect x="14" y="3" width="7" height="7"/>
+          <rect x="14" y="14" width="7" height="7"/>
+          <rect x="3" y="14" width="7" height="7"/>
+        </svg>
+        <span>Home</span>
+      </a>
+      <a class="bottom-nav-item" data-view="add-expense">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="8" x2="12" y2="16"/>
+          <line x1="8" y1="12" x2="16" y2="12"/>
+        </svg>
+        <span>Add</span>
+      </a>
+      <a class="bottom-nav-item" data-view="history">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="1 4 1 10 7 10"/>
+          <polyline points="23 20 23 14 17 14"/>
+        </svg>
+        <span>History</span>
+      </a>
+      <a class="bottom-nav-item" data-view="budget">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="4" width="20" height="16" rx="2"/>
+        </svg>
+        <span>Budget</span>
+      </a>
+      <a class="bottom-nav-item" data-view="savings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+        </svg>
+        <span>Savings</span>
+      </a>
+    </nav>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- MODALS -->
+  <!-- ============================================== -->
+
+  <!-- Modal 1: Add/Edit Expense Modal -->
+  <div class="modal-overlay" id="expenseModalOverlay">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="expenseModalTitle">
+      <div class="modal-header">
+        <h3 id="expenseModalTitle">Edit Expense</h3>
+        <button id="btnCloseExpenseModal" class="modal-close" aria-label="Close modal">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+      <form id="expenseForm">
+        <div class="modal-body">
+          <input type="hidden" id="expenseIdInput">
+          <div class="form-group">
+            <label for="expenseTitleInput">Description *</label>
+            <input type="text" id="expenseTitleInput" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="expenseAmountInput">Amount *</label>
+              <input type="number" id="expenseAmountInput" step="0.01" min="0.01" required>
+            </div>
+            <div class="form-group">
+              <label for="expenseCategorySelect">Category *</label>
+              <select id="expenseCategorySelect">
+                <!-- Populated dynamically -->
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="expenseDateInput">Date *</label>
+              <input type="date" id="expenseDateInput" required>
+            </div>
+            <div class="form-group">
+              <label for="expensePaymentSelect">Payment Method</label>
+              <select id="expensePaymentSelect">
+                <option value="UPI/Card">UPI / Debit Card</option>
+                <option value="Cash">Cash</option>
+                <option value="Online">Online / Net Banking</option>
+                <option value="Bank Transfer">Bank Transfer</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="expenseNotesInput">Notes / Receipt details</label>
+            <textarea id="expenseNotesInput" rows="2"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="btnCancelExpenseModal" class="btn btn-secondary">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal 2: Edit Total Monthly Budget -->
+  <div class="modal-overlay" id="budgetModalOverlay">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="budgetModalTitle">
+      <div class="modal-header">
+        <h3 id="budgetModalTitle">Set Monthly Allowance Budget</h3>
+        <button id="btnCloseBudgetModal" class="modal-close" aria-label="Close modal">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="budgetInput">Target Monthly Budget Limit</label>
+          <input type="number" id="budgetInput" step="1" min="0" placeholder="e.g. 600">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="btnCancelBudgetModal" class="btn btn-secondary">Cancel</button>
+        <button type="button" id="btnSaveBudget" class="btn btn-primary">Update Budget</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: Edit Category Budget Limit -->
+  <div class="modal-overlay" id="catBudgetModalOverlay">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="catBudgetModalTitle">
+      <div class="modal-header">
+        <h3 id="catBudgetModalTitle">Edit Category Budget</h3>
+        <button id="btnCloseCatBudgetModal" class="modal-close" aria-label="Close modal">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="editCatBudgetId">
+        <div class="form-group">
+          <label id="editCatBudgetNameLabel">Category Limit</label>
+          <input type="number" id="editCatBudgetAmountInput" min="0" step="1" placeholder="e.g. 150">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="btnCancelCatBudgetModal" class="btn btn-secondary">Cancel</button>
+        <button type="button" id="btnSaveCatBudget" class="btn btn-primary">Save Limit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 4: Add / Edit Savings Goal -->
+  <div class="modal-overlay" id="savingsGoalModalOverlay">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="goalModalTitle">
+      <div class="modal-header">
+        <h3 id="goalModalTitle">New Savings Goal</h3>
+        <button id="btnCloseGoalModal" class="modal-close" aria-label="Close modal">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+      <form id="goalForm">
+        <div class="modal-body">
+          <div class="form-row">
+            <div class="form-group" style="flex: 0 0 80px;">
+              <label for="goalEmojiInput">Icon</label>
+              <input type="text" id="goalEmojiInput" value="🎯" maxlength="2" style="text-align: center; font-size: 1.2rem;">
+            </div>
+            <div class="form-group" style="flex: 1;">
+              <label for="goalTitleInput">Goal Title *</label>
+              <input type="text" id="goalTitleInput" placeholder="e.g. New Laptop, Concert Ticket" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="goalTargetInput">Target Amount *</label>
+              <input type="number" id="goalTargetInput" min="1" step="0.01" placeholder="0.00" required>
+            </div>
+            <div class="form-group">
+              <label for="goalInitialSavedInput">Starting Saved Amount</label>
+              <input type="number" id="goalInitialSavedInput" min="0" step="0.01" value="0">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="goalDateInput">Target Date (Optional)</label>
+            <input type="date" id="goalDateInput">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="btnCancelGoalModal" class="btn btn-secondary">Cancel</button>
+          <button type="submit" class="btn btn-primary">Create Goal</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal 5: Deposit / Withdraw to Goal -->
+  <div class="modal-overlay" id="goalFundModalOverlay">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="goalFundModalTitle">
+      <div class="modal-header">
+        <h3 id="goalFundModalTitle">Add Money to Goal</h3>
+        <button id="btnCloseGoalFundModal" class="modal-close" aria-label="Close modal">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="fundGoalId">
+        <input type="hidden" id="fundActionType" value="deposit">
+        <p id="fundGoalSubtitle" style="font-size: 0.9rem; color: var(--text-secondary);"></p>
+        <div class="form-group">
+          <label for="fundAmountInput">Amount to Allocate</label>
+          <input type="number" id="fundAmountInput" step="0.01" min="0.01" placeholder="0.00">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="btnCancelGoalFundModal" class="btn btn-secondary">Cancel</button>
+        <button type="button" id="btnConfirmGoalFund" class="btn btn-primary">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+  <!-- Scripts -->
+  <script src="js/storage.js"></script>
+  <script src="js/tracker.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
